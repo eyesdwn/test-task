@@ -28,33 +28,12 @@ const PostText = styled.p`
 
 type Props = {
   post: PostsType;
-  onDeletePost: (id: number) => void;
 };
-const DeleteButton = styled.button`
-  margin: 0 auto;
-  width: 60px;
-  font-size: small;
-  padding: 5px;
-  outline: none;
-  cursor: pointer;
-  color: #fff;
-  background-color: rgb(116, 39, 79, 0.7);
-  border: none;
-  -webkit-transition: ease-in 0.6s;
-  transition: ease-in 0.6s;
-  /* text-align: right; */
-  // position: absolute;
-  right: 0;
-  margin-right: 20px;
-`;
 
-const PostsListItem = ({ post, onDeletePost }: Props) => {
+const PostsListItem = ({ post }: Props) => {
   return (
     <Link href="/posts/[id]" as={`/posts/${post.id}`}>
       <PostItem>
-        <DeleteButton onClick={() => onDeletePost(post.id)} type="button">
-          Delete
-        </DeleteButton>
         <PostTitle>{post.title}</PostTitle>
         <PostText>{post.body}</PostText>
       </PostItem>

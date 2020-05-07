@@ -14,7 +14,7 @@ const Body = styled.body`
   background-size: cover;
 `;
 
-const CreatePostPage = (): JSX.Element => {
+const CreatePostPage = () => {
   return (
     <Body>
       <Head>

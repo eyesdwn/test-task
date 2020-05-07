@@ -8,7 +8,7 @@ export type PostsType = {
   id: number;
   title: string;
   body: string;
-  comments: Array<CommentsType>;
+  comments?: Array<CommentsType>;
 };
 
 export type Error = {
@@ -27,4 +27,12 @@ export type stateType = {
 export type AddPost = {
   title: string;
   body: string;
+};
+
+export type BlogState = {
+  blog: {
+    posts: Array<PostsType>;
+    error: Error | null;
+    singlePost: PostsType;
+  };
 };

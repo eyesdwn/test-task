@@ -16,14 +16,13 @@ const PostList = styled.ul`
 
 type Props = {
   posts: Array<PostsType>;
-  onDeletePost: (id: number) => void;
 };
 
-const PostsList = ({ onDeletePost, posts = [] }: Props) => {
+const PostsList = ({ posts = [] }: Props) => {
   return (
     <PostList>
       {posts.reverse().map(post => (
-        <PostsListItem key={post.id} post={post} onDeletePost={onDeletePost} />
+        <PostsListItem key={post.id} post={post} />
       ))}
     </PostList>
   );

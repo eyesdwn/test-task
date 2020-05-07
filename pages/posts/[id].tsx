@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styled from "styled-components";
-import { PostsType, stateType } from "../../interfaces/index";
+import { PostsType, BlogState } from "../../interfaces/index";
 import * as selectors from "../../redux/selectors";
 import * as operations from "../../redux/operations";
 import Post from "../../components/Post";
 
 type Props = {
-  post: PostsType;
+  singlePost: PostsType;
   getSinglePost: any;
+  deletePost: (id: number) => void;
 };
 const Body = styled.body`
   background: url("https://alliswall.com/file/3057/1920x1200/16:9/dream-universe.jpg")
@@ -21,13 +22,16 @@ const Body = styled.body`
   background-size: cover;
 `;
 
-const PostPage = ({ post, getSinglePost }: Props) => {
+const PostPage = ({ singlePost, getSinglePost, deletePost }: Props) => {
   const router = useRouter();
-  const { postid } = router.query;
-  console.log(post);
+  const { id } = router.query;
+  const deletePostWithAlert = () => {
+    deletePost(singlePost.id);
+    alert("The post has been deleted");
+  };
 
   useEffect(() => {
-    getSinglePost(postid);
+    getSinglePost(id);
   }, []);
 
   return (
@@ -39,20 +43,23 @@ const PostPage = ({ post, getSinglePost }: Props) => {
           content="Learn how to build a personal website using Next.js"
         />
       </Head>
-      {post && <Post currentPost={post} />}
+      {singlePost && (
+        <Post singlePost={singlePost} onDeletePost={deletePostWithAlert} />
+      )}
     </Body>
   );
 };
 
 type StateProps = {
-  post: PostsType;
+  singlePost: PostsType;
 };
 
-const mapStateToProps = (store: stateType): StateProps => ({
-  post: selectors.getSinglePost(store),
+const mapStateToProps = (store: BlogState): StateProps => ({
+  singlePost: selectors.getSinglePost(store),
 });
 
 const mapDispatchToProps = {
+  deletePost: operations.deletePost,
   getSinglePost: operations.getSinglePost,
 };
 

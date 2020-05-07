@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createPost } from "../redux/operations";
 import styled from "styled-components";
+import { AddPost } from "../interfaces";
 
 const Form = styled.form`
   margin: 0 auto;
@@ -39,6 +40,7 @@ const FormInputText = styled.textarea`
   font-size: medium;
   display: block;
   padding: 10px;
+  resize: none;
 `;
 
 const FormButton = styled.button`
@@ -64,7 +66,7 @@ type Props = {
 
 const PostForm = ({ createPost }: Props) => {
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [body, setBody] = useState("");
 
   const onChangeTitle = (e: {
     target: { value: React.SetStateAction<string> };
@@ -72,25 +74,25 @@ const PostForm = ({ createPost }: Props) => {
     setTitle(e.target.value);
   };
 
-  const onChangeText = (e: {
+  const onChangeBody = (e: {
     target: { value: React.SetStateAction<string> };
   }): void => {
-    setText(e.target.value);
+    setBody(e.target.value);
   };
 
   const reset = (): void => {
     setTitle("");
-    setText("");
+    setBody("");
   };
 
   const handleSubmit = (e: { preventDefault: () => void }): void => {
     e.preventDefault();
 
-    if (!title || !text) return;
+    if (!title || !body) return;
 
-    const newPost: any = {
+    const newPost: AddPost = {
       title,
-      text,
+      body,
     };
 
     createPost(newPost);
@@ -113,9 +115,9 @@ const PostForm = ({ createPost }: Props) => {
       <FormLabel htmlFor="text">
         <FormInputText
           id="text"
-          value={text}
-          name="body"
-          onChange={onChangeText}
+          value={body}
+          name="text"
+          onChange={onChangeBody}
           placeholder="Enter Post text"
         />
       </FormLabel>

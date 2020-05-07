@@ -14,8 +14,11 @@ const postsReducer = (state = [], action: any): Array<PostsType> => {
       return state;
   }
 };
+const singlePostInitialState = {
+  singlePost: {} as PostsType,
+};
 
-const currentPostReducer = (state = null, action: any) => {
+const singlePostReducer = (state = singlePostInitialState, action: any) => {
   switch (action.type) {
     case ActionType.GET_SINGLE_POST_SUCCESS:
       return action.payload.post;
@@ -55,7 +58,7 @@ const errorReducer = (state = null, action: any) => {
 
 export default combineReducers({
   posts: postsReducer,
-  currentPost: currentPostReducer,
+  singlePost: singlePostReducer,
   error: errorReducer,
   deletePost: deletePostReducer,
 });

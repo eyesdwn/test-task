@@ -4,25 +4,49 @@ import { PostsType } from "../interfaces/index";
 
 const PostWrapper = styled.div`
   margin: 0 auto;
-  width: 60%;
-  border-radius: 10px;
+  width: 40%;
+  padding: 20px;
   text-align: left;
-  font-family: sans-serif;
+  font-family: helvetica;
+  font-size: medium;
+  font-weight: 200;
+  background-color: rgba(115, 93, 91, 0.6);
 `;
 
 const PostBody = styled.p`
-  color: #313b3f;
+  color: #feb59d;
+`;
+const DeleteButton = styled.button`
+  margin: 0 auto;
+  width: 60px;
+  font-size: small;
+  padding: 5px;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: rgb(116, 39, 79, 0.7);
+  border: none;
+  -webkit-transition: ease-in 0.6s;
+  transition: ease-in 0.6s;
+  /* text-align: right; */
+  // position: absolute;
+  right: 0;
+  margin-right: 20px;
 `;
 
 type Props = {
-  currentPost: PostsType;
+  singlePost: PostsType;
+  onDeletePost: (id: number) => void;
 };
 
-const Post = ({ currentPost }: Props) => {
+const Post = ({ onDeletePost, singlePost }: Props) => {
   return (
     <PostWrapper>
-      <h2>{currentPost.title}</h2>
-      <PostBody>{currentPost.body}</PostBody>
+      <h2>{singlePost.title}</h2>
+      <PostBody>{singlePost.body}</PostBody>
+      <DeleteButton onClick={() => onDeletePost(singlePost.id)} type="button">
+        Delete
+      </DeleteButton>
     </PostWrapper>
   );
 };

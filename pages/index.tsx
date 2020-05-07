@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { PostsType, stateType } from "../interfaces/index";
+import { PostsType, BlogState } from "../interfaces/index";
 import * as selectors from "../redux/selectors";
 import * as operations from "../redux/operations";
 import Head from "next/head";
@@ -10,7 +10,6 @@ import PostList from "../components/PostList";
 type Props = {
   posts: Array<PostsType>;
   getPostsList: any;
-  deletePost: (id: number) => void;
 };
 const Body = styled.body`
   font-family: sans-serif;
@@ -22,7 +21,7 @@ const Body = styled.body`
   -o-background-size: cover;
   background-size: cover;
 `;
-const indexPage = ({ posts, getPostsList, deletePost }: Props) => {
+const indexPage = ({ posts, getPostsList }: Props) => {
   useEffect(() => {
     getPostsList();
   }, []);
@@ -37,23 +36,22 @@ const indexPage = ({ posts, getPostsList, deletePost }: Props) => {
         />
       </Head>
       <div>
-        <PostList posts={posts} onDeletePost={deletePost} />
+        <PostList posts={posts} />
       </div>
     </Body>
   );
 };
 
 type StateProps = {
-  posts: Array<PostsType>;
+  posts: PostsType[];
 };
 
-const mapStateToProps = (store: stateType): StateProps => ({
+const mapStateToProps = (store: BlogState): StateProps => ({
   posts: selectors.getPosts(store),
 });
 
 const mapDispatchToProps = {
   getPostsList: operations.getPostsList,
-  deletePost: operations.deletePost,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(indexPage);
