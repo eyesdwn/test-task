@@ -37,7 +37,7 @@ const PostPage = ({ singlePost, getSinglePost, deletePost }: Props) => {
   return (
     <Body>
       <Head>
-        <title>Post Title</title>
+        <title>{singlePost.title}</title>
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
