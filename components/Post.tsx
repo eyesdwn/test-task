@@ -12,7 +12,9 @@ const PostWrapper = styled.div`
   font-weight: 200;
   background-color: rgba(115, 93, 91, 0.6);
 `;
-
+const PostTitle = styled.h2`
+  color: white;
+`;
 const PostBody = styled.p`
   color: #feb59d;
 `;
@@ -42,7 +44,7 @@ type Props = {
 const Post = ({ onDeletePost, singlePost }: Props) => {
   return (
     <PostWrapper>
-      <h2>{singlePost.title}</h2>
+      <PostTitle>{singlePost.title}</PostTitle>
       <PostBody>{singlePost.body}</PostBody>
       <DeleteButton onClick={() => onDeletePost(singlePost.id)} type="button">
         Delete

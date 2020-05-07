@@ -14,6 +14,7 @@ type Props = {
   deletePost: (id: number) => void;
 };
 const Body = styled.body`
+  font-family: sans-serif;
   background: url("https://alliswall.com/file/3057/1920x1200/16:9/dream-universe.jpg")
     no-repeat center center fixed;
   -webkit-background-size: cover;

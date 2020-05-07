@@ -5,6 +5,7 @@ import styled from "styled-components";
 import PostForm from "../../components/PostForm";
 
 const Body = styled.body`
+  font-family: sans-serif;
   background-attachment: fixed;
   background: url("https://alliswall.com/file/3057/1920x1200/16:9/dream-universe.jpg")
     no-repeat center center fixed;
